@@ -17,8 +17,8 @@ public class Main {
             "1 = Lista(list) \n"+
             "2 = Nuevo(New) \n"+
             "3 = Borrar(Delete) \n"+
-            "4 = obtener persona(get) \n"+
-            "5 = actualizar persona(update) \n"+
+            "4 = obtener item(get) \n"+
+            "5 = actualizar item(update) \n"+
             "0 = Salida(Exit) \n"+
             "elegir opcion / choise option: ");
             opt = input.nextInt();
@@ -28,7 +28,11 @@ public class Main {
                 case 1:
                     System.out.println("Listado de personas ");
                     for (Items d : data.list("")) {
-                        System.out.println(d.getId() + "\t" + d.getNombre() + "\t" + d.getCategoria() + "\t" + d.getFamilia() + "\t" + d.getPrecio());
+                        System.out.println(d.getId()
+                         + "\t" + d.getNombre() 
+                        + "\t" + d.getCategoria() 
+                        + "\t" + d.getFamilia() 
+                        + "\t" + d.getPrecio());
                     }
                     break;
                 case 2:
@@ -38,26 +42,30 @@ public class Main {
                     p.setNombre(input.nextLine());
                     System.out.print("categoria: ");
                     p.setCategoria(input.nextLine());
-
                     System.out.print("familia: ");
+                    p.setFamilia(input.nextLine());
+                    
+
+                    System.out.print("precio: ");
                     try {
-                        p.setFamilia(input.next());
+                        p.setPrecio(input.nextInt());
                         data.create(p);
                     } catch (Exception e) {
                         input.nextLine(); // Limpiar el buffer
-                        System.out.print("Edad debe ser entero, no se guardo");
+                        System.out.print("el precio tiene que ser un numero");
                     }
-
+                    System.out.print("familia: ");
+                    p.setFamilia(input.nextLine());
                     break;
                 case 3:
-                    System.out.println("Eliminar persona ");
+                    System.out.println("Eliminar item ");
                     System.out.print("id: ");
                     data.delete(input.nextInt());
                     break;
                 case 4:
                     int b4 = 1;
                     do {
-                        System.out.println("get persona ");
+                        System.out.println("obetener item ");
                         System.out.print("id: ");
                         int id = 0;
                         try {
@@ -80,30 +88,35 @@ public class Main {
 
                     break;
                 case 5:
-                    System.out.println("update persona ");
+                    System.out.println("actualizar item ");
                     System.out.print("id: ");
 
                     Items per = data.get(input.nextInt());
 
                     if (per != null) {
-                        System.out.println("Name current: " + per.getNombre());
-                        System.out.println("Sex current: " + per.getCategoria());
+                        System.out.println("nombre de item actual: " + per.getNombre());
+                        System.out.println("categoria de item actual: " + per.getCategoria());
+                        System.out.println("familia de item actual: " + per.getFamilia());
+                        System.out.println("precio de item actual : " + per.getPrecio());
 
                         input.nextLine(); // Limpiar el buffer
-                        System.out.print("new name: ");
+                        System.out.print("nuevo nombre de item: ");
                         per.setNombre(input.nextLine());
 
-                        System.out.print("new sex: ");
+                        System.out.print("nuevo categoria de item: ");
                         per.setCategoria(input.nextLine());
 
-                        System.out.print("edad: ");
+                        System.out.print("nuevo familia de item: ");
+                        per.setCategoria(input.nextLine());
+
+                        System.out.print("nueva precio de item: ");
                         try {
-                            per.setFamilia(input.next());
+                            per.setPrecio(input.nextInt());
                             data.update(per);
                         } catch (Exception e) {
-                            // per.setAge(0);
+                            // per.setPrecio(0);
                             input.nextLine(); // Limpiar el buffer
-                            System.out.print("Edad debe ser entero, no se guardo");
+                            System.out.print("precio debe ser numero");
                         }
 
                     } else {
